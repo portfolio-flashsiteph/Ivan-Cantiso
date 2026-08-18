@@ -93,12 +93,13 @@ $(document).ready(function () {
   $(window).on('scroll resize', revealOnScroll);
   revealOnScroll();
 
-  // 5. Interactive Testimonial Slider
+  // 5. Dynamic Testimonial Slider
   var slides = $('.testimonial-slide');
   var totalSlides = slides.length;
   var currentIndex = 0;
   var autoSlideInterval;
 
+  // Auto-generate dots based on total slides count
   var dotsContainer = $('#sliderDots');
   dotsContainer.empty();
   for (var i = 0; i < totalSlides; i++) {
