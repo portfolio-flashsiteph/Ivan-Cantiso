@@ -16,7 +16,6 @@ $(document).ready(function () {
     $('body').toggleClass('menu-open');
   });
 
-  // Close menu on clicking outside
   $(document).on('click', function (e) {
     if (!$(e.target).closest('#nav-menu, #nav-toggle').length) {
       $('#nav-menu').removeClass('active');
@@ -41,7 +40,7 @@ $(document).ready(function () {
     }
   });
 
-  // 4. Scroll Reveal Animations & Skill Counters Trigger
+  // 4. Scroll Reveal Animations & Skill Counters
   var skillsTriggered = false;
 
   function revealOnScroll() {
@@ -93,65 +92,89 @@ $(document).ready(function () {
   $(window).on('scroll resize', revealOnScroll);
   revealOnScroll();
 
-  // 5. Dynamic Testimonial Slider
+  // 5. Testimonial Slider System
   var slides = $('.testimonial-slide');
   var totalSlides = slides.length;
   var currentIndex = 0;
-  var autoSlideInterval;
+  var autoSlideInterval = null;
 
-  // Auto-generate dots based on total slides count
-  var dotsContainer = $('#sliderDots');
-  dotsContainer.empty();
-  for (var i = 0; i < totalSlides; i++) {
-    dotsContainer.append('<div class="dot ' + (i === 0 ? 'active' : '') + '" data-index="' + i + '"></div>');
+  function initSliderDots() {
+    var dotsContainer = $('#sliderDots');
+    dotsContainer.empty();
+    slides.each(function (i) {
+      dotsContainer.append('<div class="dot' + (i === 0 ? ' active' : '') + '" data-index="' + i + '"></div>');
+    });
   }
 
   function showSlide(index) {
-    if (index < 0) {
-      currentIndex = totalSlides - 1;
-    } else if (index >= totalSlides) {
+    if (index >= totalSlides) {
       currentIndex = 0;
+    } else if (index < 0) {
+      currentIndex = totalSlides - 1;
     } else {
       currentIndex = index;
     }
 
-    slides.removeClass('active');
-    slides.eq(currentIndex).addClass('active');
+    slides.removeClass('active').hide();
+    slides.eq(currentIndex).addClass('active').fadeIn(400);
 
     $('.dot').removeClass('active');
     $('.dot').eq(currentIndex).addClass('active');
   }
 
-  $('#nextSlide').on('click', function () {
-    showSlide(currentIndex + 1);
-    resetAutoSlide();
-  });
-
-  $('#prevSlide').on('click', function () {
-    showSlide(currentIndex - 1);
-    resetAutoSlide();
-  });
-
-  $(document).on('click', '.dot', function () {
-    var idx = parseInt($(this).attr('data-index'));
-    showSlide(idx);
-    resetAutoSlide();
-  });
-
   function startAutoSlide() {
+    stopAutoSlide();
     autoSlideInterval = setInterval(function () {
       showSlide(currentIndex + 1);
     }, 5000);
   }
 
-  function resetAutoSlide() {
-    clearInterval(autoSlideInterval);
-    startAutoSlide();
+  function stopAutoSlide() {
+    if (autoSlideInterval) {
+      clearInterval(autoSlideInterval);
+    }
   }
 
-  startAutoSlide();
+  // Bind Slider Events
+  if (totalSlides > 0) {
+    initSliderDots();
+    showSlide(0);
+    startAutoSlide();
 
-  // 6. Form Submission Handlers
+    $('#nextSlide').off('click').on('click', function () {
+      showSlide(currentIndex + 1);
+      startAutoSlide();
+    });
+
+    $('#prevSlide').off('click').on('click', function () {
+      showSlide(currentIndex - 1);
+      startAutoSlide();
+    });
+
+    $(document).off('click', '.dot').on('click', '.dot', function () {
+      var idx = parseInt($(this).attr('data-index'));
+      showSlide(idx);
+      startAutoSlide();
+    });
+  }
+
+  // 6. Portfolio Image Lightbox Modal
+  $('.lightbox-trigger').on('click', function () {
+    var fullImgSrc = $(this).attr('data-img');
+    var imgTitle = $(this).attr('data-title');
+
+    $('#lightboxImage').attr('src', fullImgSrc);
+    $('#lightboxCaption').text(imgTitle);
+    $('#lightboxModal').fadeIn(300);
+  });
+
+  $('#lightboxClose, #lightboxModal').on('click', function (e) {
+    if (e.target !== $('#lightboxImage')[0]) {
+      $('#lightboxModal').fadeOut(300);
+    }
+  });
+
+  // 7. Form Handlers
   $('#contactForm').on('submit', function (e) {
     e.preventDefault();
     alert('Thank you for reaching out, Ivan will get back to you shortly!');
