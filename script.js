@@ -9,7 +9,7 @@ $(document).ready(function () {
     }
   });
 
-  // 2. Mobile Navigation Toggle & Backdrop Management
+  // 2. Mobile Navigation Toggle & Backdrop
   $('#nav-toggle').on('click', function (e) {
     e.stopPropagation();
     $('#nav-menu').toggleClass('active');
@@ -135,7 +135,6 @@ $(document).ready(function () {
     }
   }
 
-  // Bind Slider Events
   if (totalSlides > 0) {
     initSliderDots();
     showSlide(0);
@@ -158,32 +157,48 @@ $(document).ready(function () {
     });
   }
 
-  // 6. Portfolio Image Lightbox Modal
-  $('.lightbox-trigger').on('click', function () {
-    var fullImgSrc = $(this).attr('data-img');
-    var imgTitle = $(this).attr('data-title');
+  // 6. Portfolio Lightbox Modal (Delegated Handler)
+  $(document).on('click', '.lightbox-trigger', function (e) {
+    e.preventDefault();
+    var fullImgSrc = $(this).attr('data-img') || $(this).find('img').attr('src');
+    var imgTitle = $(this).attr('data-title') || $(this).find('img').attr('alt') || '';
 
     $('#lightboxImage').attr('src', fullImgSrc);
     $('#lightboxCaption').text(imgTitle);
-    $('#lightboxModal').fadeIn(300);
+    $('#lightboxModal').addClass('active').css('display', 'flex').hide().fadeIn(300);
+    $('body').css('overflow', 'hidden');
   });
 
-  $('#lightboxClose, #lightboxModal').on('click', function (e) {
+  function closeLightbox() {
+    $('#lightboxModal').fadeOut(300, function () {
+      $(this).removeClass('active');
+      $('#lightboxImage').attr('src', '');
+      $('body').css('overflow', '');
+    });
+  }
+
+  $(document).on('click', '#lightboxClose, #lightboxModal', function (e) {
     if (e.target !== $('#lightboxImage')[0]) {
-      $('#lightboxModal').fadeOut(300);
+      closeLightbox();
+    }
+  });
+
+  $(document).on('keydown', function (e) {
+    if (e.key === 'Escape' && $('#lightboxModal').hasClass('active')) {
+      closeLightbox();
     }
   });
 
   // 7. Form Handlers
   $('#contactForm').on('submit', function (e) {
     e.preventDefault();
-    alert('Thank you for reaching out, Ivan will get back to you shortly!');
+    alert('Thank you for reaching out!');
     $(this)[0].reset();
   });
 
   $('#newsletterForm').on('submit', function (e) {
     e.preventDefault();
-    alert('Thank you for subscribing to Ivan Cantiso\'s content strategy briefing!');
+    alert('Thank you for subscribing!');
     $(this)[0].reset();
   });
 
