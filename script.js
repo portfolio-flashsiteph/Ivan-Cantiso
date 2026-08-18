@@ -9,12 +9,12 @@ $(document).ready(function () {
     }
   });
 
-  // 2. Mobile Menu Toggle
+  // 2. Mobile Navigation Toggle
   $('#nav-toggle').on('click', function () {
     $('#nav-menu').toggleClass('active');
   });
 
-  // 3. Smooth Scroll
+  // 3. Smooth Scroll Navigation
   $('.nav-link, .btn, .footer-nav a').on('click', function (e) {
     var href = $(this).attr('href');
     if (href && href.startsWith('#') && href.length > 1) {
@@ -30,14 +30,14 @@ $(document).ready(function () {
     }
   });
 
-  // 4. Scroll Reveal Animations & Animated Counters Trigger
+  // 4. Scroll Reveal Animations & Number Counter Trigger
   var skillsTriggered = false;
 
   function revealOnScroll() {
     var windowHeight = $(window).height();
     var scrollTop = $(window).scrollTop();
 
-    // Scroll Animations Trigger
+    // Reveal elements on scroll
     $('.reveal-left, .reveal-right, .reveal-bottom').each(function () {
       var elementTop = $(this).offset().top;
       if (scrollTop + windowHeight - 100 > elementTop) {
@@ -45,7 +45,7 @@ $(document).ready(function () {
       }
     });
 
-    // Circular Chart Counter Trigger
+    // Circular Skill Chart & Counter Trigger
     var skillsElem = $('#skills-section');
     if (skillsElem.length && !skillsTriggered) {
       var skillsTop = skillsElem.offset().top;
@@ -56,7 +56,7 @@ $(document).ready(function () {
     }
   }
 
-  // Counter & Skill Circle Dynamic Animation Function
+  // Smooth Counter Animation Function
   function animateSkillCounters() {
     $('.counter').each(function () {
       var $this = $(this);
@@ -68,8 +68,8 @@ $(document).ready(function () {
         {
           duration: 2000,
           easing: 'swing',
-          step: function () {
-            var currentVal = Math.floor(this.countNum);
+          step: function (now) {
+            var currentVal = Math.floor(now);
             $this.text(currentVal);
             parentChart.css('--percent', currentVal);
           },
@@ -82,14 +82,21 @@ $(document).ready(function () {
     });
   }
 
-  // Initial trigger check on page load and window scroll
+  // Check positions on page load and on scrolling
   $(window).on('scroll resize', revealOnScroll);
   revealOnScroll();
 
-  // 5. Prevent Newsletter Submit Default Behavior
+  // 5. Contact Form Handler
+  $('#contactForm').on('submit', function (e) {
+    e.preventDefault();
+    alert('Thank you for reaching out! Your message has been sent successfully.');
+    $(this)[0].reset();
+  });
+
+  // 6. Newsletter Form Handler
   $('#newsletterForm').on('submit', function (e) {
     e.preventDefault();
-    alert('Thank you for subscribing!');
+    alert('Thank you for subscribing to our newsletter!');
     $(this)[0].reset();
   });
 
