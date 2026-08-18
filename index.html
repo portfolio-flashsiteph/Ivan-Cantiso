@@ -79,7 +79,6 @@
         <p class="header-desc">A track record of managing cross-functional editorial teams, executing SEO strategies, and refining digital copy.</p>
       </div>
 
-      <!-- Experience Cards Row -->
       <div class="grid-4 career-grid reveal-bottom">
         <div class="experience-card card-hover-effect">
           <span class="exp-date">2021 - PRESENT</span>
@@ -107,7 +106,6 @@
         </div>
       </div>
 
-      <!-- Circular Skills Row with Counter -->
       <div class="skills-circles-grid grid-4 reveal-bottom" id="skills-section">
         <div class="circle-item">
           <div class="circle-chart" data-percent="95">
@@ -188,7 +186,7 @@
     </div>
   </section>
 
-  <!-- Portfolio Section -->
+  <!-- Portfolio Section (6 Lightbox Images) -->
   <section class="portfolio section-padding" id="portfolio">
     <div class="container">
       <div class="section-header flex-header reveal-bottom">
@@ -200,20 +198,43 @@
       </div>
 
       <div class="portfolio-grid grid-3 reveal-bottom">
-        <div class="portfolio-card img-zoom-effect">
+        <div class="portfolio-card img-zoom-effect lightbox-trigger" data-title="SaaS Content Revamp" data-img="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80">
           <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80" alt="SaaS Content Revamp">
           <div class="portfolio-overlay">
             <span class="view-btn"><i class="fas fa-search-plus"></i></span>
           </div>
         </div>
-        <div class="portfolio-card img-zoom-effect">
+
+        <div class="portfolio-card img-zoom-effect lightbox-trigger" data-title="E-Commerce Copywriting" data-img="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80">
           <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="E-Commerce Copywriting">
           <div class="portfolio-overlay">
             <span class="view-btn"><i class="fas fa-search-plus"></i></span>
           </div>
         </div>
-        <div class="portfolio-card img-zoom-effect">
+
+        <div class="portfolio-card img-zoom-effect lightbox-trigger" data-title="SEO Traffic Campaign" data-img="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80">
           <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="SEO Traffic Campaign">
+          <div class="portfolio-overlay">
+            <span class="view-btn"><i class="fas fa-search-plus"></i></span>
+          </div>
+        </div>
+
+        <div class="portfolio-card img-zoom-effect lightbox-trigger" data-title="Editorial Workflow Engine" data-img="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Editorial Workflow Engine">
+          <div class="portfolio-overlay">
+            <span class="view-btn"><i class="fas fa-search-plus"></i></span>
+          </div>
+        </div>
+
+        <div class="portfolio-card img-zoom-effect lightbox-trigger" data-title="Brand Voice & Guidelines" data-img="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80">
+          <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80" alt="Brand Voice Guidelines">
+          <div class="portfolio-overlay">
+            <span class="view-btn"><i class="fas fa-search-plus"></i></span>
+          </div>
+        </div>
+
+        <div class="portfolio-card img-zoom-effect lightbox-trigger" data-title="Organic Conversion Strategy" data-img="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1200&q=80">
+          <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=600&q=80" alt="Organic Conversion Strategy">
           <div class="portfolio-overlay">
             <span class="view-btn"><i class="fas fa-search-plus"></i></span>
           </div>
@@ -222,7 +243,14 @@
     </div>
   </section>
 
-  <!-- Testimonials Slider Section (5 Slides) -->
+  <!-- Lightbox Modal -->
+  <div class="lightbox-modal" id="lightboxModal">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <img class="lightbox-content" id="lightboxImage" alt="Enlarged Project View">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+
+  <!-- Testimonials Slider Section -->
   <section class="testimonials section-padding">
     <div class="container">
       <div class="section-header flex-header reveal-bottom">
@@ -236,7 +264,7 @@
       <div class="testimonial-slider-container reveal-bottom">
         <div class="testimonial-slider" id="testimonialSlider">
           
-          <div class="testimonial-slide active">
+          <div class="testimonial-slide">
             <div class="testimonial-card card-hover-effect">
               <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
               <p class="quote-text">
@@ -305,9 +333,9 @@
 
         <!-- Slider Controls -->
         <div class="slider-controls">
-          <button class="slider-btn prev-btn" id="prevSlide"><i class="fas fa-chevron-left"></i></button>
+          <button class="slider-btn prev-btn" id="prevSlide" type="button"><i class="fas fa-chevron-left"></i></button>
           <div class="slider-dots" id="sliderDots"></div>
-          <button class="slider-btn next-btn" id="nextSlide"><i class="fas fa-chevron-right"></i></button>
+          <button class="slider-btn next-btn" id="nextSlide" type="button"><i class="fas fa-chevron-right"></i></button>
         </div>
       </div>
     </div>
