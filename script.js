@@ -1,34 +1,30 @@
 $(document).ready(function () {
 
-  // Sticky Navbar implementation
-  $(window).on('scroll', function () {
-    if ($(window).scrollTop() > 50) {
-      $('#navbar').addClass('sticky');
-    } else {
-      $('#navbar').removeClass('sticky');
-    }
+  // Dynamic conic-gradient style generator for skill circles
+  $('.circle-chart').each(function () {
+    var percent = $(this).attr('data-percent');
+    $(this).css('--percent', percent);
   });
 
-  // Mobile Menu Toggle
+  // Mobile navigation drawer toggle
   $('#nav-toggle').on('click', function () {
     $('#nav-menu').toggleClass('active');
   });
 
-  // Smooth Scroll and Navigation Link Activation
-  $('.nav-link').on('click', function (e) {
+  // Smooth scroll logic for menu links
+  $('.nav-link, .footer-nav a').on('click', function (e) {
     var target = $(this.getAttribute('href'));
     if (target.length) {
       e.preventDefault();
       $('html, body').stop().animate({
-        scrollTop: target.offset().top - 70
+        scrollTop: target.offset().top - 80
       }, 600);
       
-      // Close mobile navigation on click
       $('#nav-menu').removeClass('active');
     }
   });
 
-  // Highlight Active Link on Scroll
+  // Highlight navigation options on scroll
   $(window).on('scroll', function () {
     var scrollPos = $(document).scrollTop() + 100;
     
@@ -43,7 +39,7 @@ $(document).ready(function () {
     });
   });
 
-  // Prevent default newsletter submit action
+  // Form Submission Prevent Default
   $('#newsletterForm').on('submit', function (e) {
     e.preventDefault();
     alert('Thank you for subscribing!');
